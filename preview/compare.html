@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>特価カード画像 見本</title>
+  <style>
+    :root {
+      --page: #e7e5e4;
+      --ink: #1c1917;
+      --muted: #57534e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 28px 24px 40px;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+    }
+
+    header {
+      max-width: 1180px;
+      margin: 0 auto 20px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    figcaption {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    figcaption strong {
+      font-size: 15px;
+    }
+
+    figcaption span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .note {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .ad {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      container-type: inline-size;
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+
+    .stage {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 4.2cqw;
+      padding: 4.6cqw 4.8cqw;
+    }
+
+    .card {
+      height: 100%;
+      aspect-ratio: 63 / 88;
+      border-radius: 4.5% / 3.2%;
+      background: #f3d56a;
+      padding: 3.6%;
+      box-shadow: 0 1.4cqw 2.8cqw rgba(0, 0, 0, 0.38);
+    }
+
+    .card-inner {
+      height: 100%;
+      background: #1a120c;
+      border-radius: 3% / 2.2%;
+      padding: 3.2%;
+      display: flex;
+      flex-direction: column;
+      gap: 3%;
+    }
+
+    .card-art {
+      flex: 1;
+      border-radius: 3%;
+      background:
+        radial-gradient(circle at 50% 42%, #ffb15a 0 16%, transparent 17%),
+        radial-gradient(circle at 50% 58%, #e23b2f 0 28%, transparent 29%),
+        linear-gradient(180deg, #7a2a22 0%, #2a120e 100%);
+      position: relative;
+    }
+
+    .card-art::after {
+      content: "";
+      position: absolute;
+      left: 18%;
+      right: 18%;
+      top: 22%;
+      bottom: 18%;
+      background: linear-gradient(160deg, #ffe08a, #ff7a3c 42%, #9a1d18);
+      clip-path: polygon(50% 0, 78% 28%, 100% 70%, 62% 100%, 38% 100%, 0 68%, 22% 26%);
+      opacity: 0.95;
+    }
+
+    .card-label {
+      height: 11%;
+      border-radius: 2px;
+      background: linear-gradient(180deg, #f6e7b2, #c9a15b);
+    }
+
+    .copy {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      height: 2.5cqw;
+      padding: 0 1.1cqw;
+      border-radius: 999px;
+      font-size: 1.55cqw;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      line-height: 1;
+    }
+
+    .list {
+      margin: 1.5cqw 0 0;
+      font-size: 2.15cqw;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: line-through;
+      text-decoration-thickness: 0.12cqw;
+    }
+
+    .price {
+      margin-top: 0.2cqw;
+      font-size: 8.4cqw;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .name {
+      margin: 1.7cqw 0 0;
+      max-width: 100%;
+      font-size: 3.15cqw;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: 0.01em;
+    }
+
+    .condition {
+      margin-top: 1.35cqw;
+      display: inline-flex;
+      align-items: center;
+      height: 3.1cqw;
+      padding: 0 1.25cqw;
+      border-radius: 999px;
+      font-size: 1.7cqw;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .shop {
+      margin-top: auto;
+      padding-top: 1.6cqw;
+      font-size: 1.45cqw;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+    }
+
+    .dark {
+      background:
+        radial-gradient(120% 90% at 18% 50%, #1c2433 0%, #0d1118 58%, #090c11 100%);
+      color: #f7f4ec;
+    }
+
+    .dark .badge {
+      background: #e4c36a;
+      color: #2a2108;
+    }
+
+    .dark .list { color: #8e97a8; }
+    .dark .price { color: #fff8e8; }
+    .dark .name { color: #f4f6fa; }
+    .dark .condition {
+      color: #e7ebf2;
+      border: 0.12cqw solid rgba(255, 255, 255, 0.38);
+    }
+    .dark .shop { color: #8e97a8; }
+
+    .sale {
+      background:
+        linear-gradient(180deg, #fffefb 0%, #fff6ea 100%);
+      color: #1c1917;
+    }
+
+    .sale::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 1.15cqw;
+      background: #e10600;
+    }
+
+    .sale .badge {
+      background: #e10600;
+      color: white;
+    }
+
+    .sale .list { color: #a8a29e; }
+
+    .sale .price {
+      margin-top: 0.7cqw;
+      padding: 0.35cqw 1.1cqw 0.55cqw;
+      background: #ffe14a;
+      color: #e10600;
+      box-decoration-break: clone;
+    }
+
+    .sale .name { color: #1c1917; }
+    .sale .condition {
+      background: #1c1917;
+      color: white;
+    }
+    .sale .shop { color: #78716c; }
+
+    .hybrid {
+      background:
+        radial-gradient(120% 90% at 18% 50%, #1c2433 0%, #0d1118 58%, #090c11 100%);
+      color: #f7f4ec;
+    }
+
+    .hybrid .badge {
+      background: #e10600;
+      color: white;
+    }
+
+    .hybrid .list { color: #8e97a8; }
+
+    .hybrid .price {
+      margin-top: 0.7cqw;
+      padding: 0.35cqw 1.1cqw 0.55cqw;
+      background: #ffe14a;
+      color: #e10600;
+      box-decoration-break: clone;
+    }
+
+    .hybrid .name { color: #f4f6fa; }
+    .hybrid .condition {
+      color: #e7ebf2;
+      border: 0.12cqw solid rgba(255, 255, 255, 0.38);
+    }
+    .hybrid .shop { color: #8e97a8; }
+
+    .meta {
+      max-width: 1180px;
+      margin: 22px auto 0;
+      padding: 14px 16px;
+      background: white;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #44403c;
+    }
+
+    .meta strong { color: #1c1917; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>特価カード画像の見本</h1>
+    <p>1200×675（16:9）。左がカード、右が価格。定価とショップ名は入れても入れなくても成立する位置に置いてあります。</p>
+  </header>
+
+  <div class="grid">
+    <figure>
+      <figcaption>
+        <strong>A. 濃い背景</strong>
+        <span>カードを浮かせる</span>
+      </figcaption>
+      <div class="ad dark">
+        <div class="stage">
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-art"></div>
+              <div class="card-label"></div>
+            </div>
+          </div>
+          <div class="copy">
+            <div class="badge">特価</div>
+            <div class="list">¥8,800</div>
+            <div class="price">¥3,980</div>
+            <div class="name">蒼炎の支配竜</div>
+            <div class="condition">美品</div>
+            <div class="shop">CARD SHOP</div>
+          </div>
+        </div>
+      </div>
+      <p class="note">白や黄色の枠のカードが背景に溶けにくい。価格は白で大きく、特価ラベルだけ金。</p>
+    </figure>
+
+    <figure>
+      <figcaption>
+        <strong>B. 明るい特価</strong>
+        <span>安さを先に見せる</span>
+      </figcaption>
+      <div class="ad sale">
+        <div class="stage">
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-art"></div>
+              <div class="card-label"></div>
+            </div>
+          </div>
+          <div class="copy">
+            <div class="badge">特価</div>
+            <div class="list">¥8,800</div>
+            <div class="price">¥3,980</div>
+            <div class="name">蒼炎の支配竜</div>
+            <div class="condition">美品</div>
+            <div class="shop">CARD SHOP</div>
+          </div>
+        </div>
+      </div>
+      <p class="note">価格を黄色地の赤文字にして、タイムラインで「安い」が先に読めるようにした案。</p>
+    </figure>
+
+    <figure>
+      <figcaption>
+        <strong>C. 濃い背景＋特価の価格</strong>
+        <span>Aの土台にBの価格</span>
+      </figcaption>
+      <div class="ad hybrid">
+        <div class="stage">
+          <div class="card">
+            <div class="card-inner">
+              <div class="card-art"></div>
+              <div class="card-label"></div>
+            </div>
+          </div>
+          <div class="copy">
+            <div class="badge">特価</div>
+            <div class="list">¥8,800</div>
+            <div class="price">¥3,980</div>
+            <div class="name">蒼炎の支配竜</div>
+            <div class="condition">美品</div>
+            <div class="shop">CARD SHOP</div>
+          </div>
+        </div>
+      </div>
+      <p class="note">カードは暗い面に浮かせ、価格だけ黄地に赤文字。枠色が違うカードでも背景に溶けにくい。</p>
+    </figure>
+  </div>
+
+  <div class="meta">
+    <strong>共通の中身:</strong>
+    特価ラベル、価格、カード名、状態は常に表示。定価（取り消し線）とショップ名は空ならその行だけ消す。
+    カード枠は 63:88 固定で、アップロード画像は枠の中に全体が入る。
+  </div>
+</body>
+</html>
