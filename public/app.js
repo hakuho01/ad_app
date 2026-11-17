@@ -31,7 +31,8 @@ const status = document.querySelector("#status");
 const canvas = document.querySelector("#preview");
 const ctx = canvas.getContext("2d");
 
-const state = { image: null, url: null };
+const state = { image: null };
+let loadToken = 0;
 const footer = new Image();
 footer.onload = () => render();
 footer.src = "shop-footer.png";
@@ -99,30 +100,37 @@ function loadFile(file) {
     setStatus("画像ファイルを選んでください");
     return;
   }
-  if (state.url) URL.revokeObjectURL(state.url);
-  const url = URL.createObjectURL(file);
-  const image = new Image();
-  image.onload = () => {
-    state.image = image;
-    state.url = url;
-    thumb.src = url;
-    thumb.classList.add("show");
-    dropLabel.textContent = "⌘V で差し替え";
-    clearStatus();
-    render();
-    priceInput.focus();
+  const token = ++loadToken;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const url = reader.result;
+    const image = new Image();
+    image.onload = () => {
+      if (token !== loadToken) return;
+      state.image = image;
+      thumb.src = url;
+      thumb.classList.add("show");
+      dropLabel.textContent = "⌘V で差し替え";
+      clearStatus();
+      render();
+      priceInput.focus();
+    };
+    image.onerror = () => {
+      if (token !== loadToken) return;
+      setStatus("この画像は読み込めません");
+    };
+    image.src = url;
   };
-  image.onerror = () => {
-    URL.revokeObjectURL(url);
+  reader.onerror = () => {
+    if (token !== loadToken) return;
     setStatus("この画像は読み込めません");
   };
-  image.src = url;
+  reader.readAsDataURL(file);
 }
 
 function nextCard() {
-  if (state.url) URL.revokeObjectURL(state.url);
+  loadToken += 1;
   state.image = null;
-  state.url = null;
   fileInput.value = "";
   thumb.removeAttribute("src");
   thumb.classList.remove("show");
@@ -142,15 +150,11 @@ function download() {
     return;
   }
   render();
-  canvas.toBlob((blob) => {
-    const link = document.createElement("a");
-    const url = URL.createObjectURL(blob);
-    link.href = url;
-    link.download = downloadName();
-    link.click();
-    URL.revokeObjectURL(url);
-    setStatus("保存しました");
-  }, "image/png");
+  const link = document.createElement("a");
+  link.href = canvas.toDataURL("image/png");
+  link.download = downloadName();
+  link.click();
+  setStatus("保存しました");
 }
 
 function render() {
